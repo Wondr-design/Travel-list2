@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 
-const Form = () => {
+const Form = ({ onAddItems }) => {
   const [description, setDescription] = useState("");
   const [quantity, setQuantity] = useState(1);
+
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // if the input field is empty
+    if (!description) return;
 
     const newItem = {
       description: description,
@@ -12,9 +16,11 @@ const Form = () => {
       packed: false,
       id: Date.now(),
     };
+
+    onAddItems(newItem);
     console.log(newItem);
-    // if the input field is empty
-    if (!description) return;
+   
+
     // Clear input fields
     setDescription("");
     setQuantity(1);
